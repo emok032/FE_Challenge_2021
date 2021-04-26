@@ -14,6 +14,9 @@ $(document).ready(function () {
     }
 
     if (x === true) {
+      $("#content").addClass("hidden");
+      $("#spinner").removeClass("hidden");
+      
       document.querySelector('input[type="text"]').parentNode.classList.remove("error");
       const proxyurl = "";
       const url =
