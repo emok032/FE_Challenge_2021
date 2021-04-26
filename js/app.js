@@ -2,12 +2,12 @@ $(document).ready(function () {
 
   let toggleSelected = "#email-toggle";
 
-  const submitSearch = () => {
+  const submitSearch = (e) => {
     /**
        * Makes a request to ltv API to search an specific email address.
        * If there's a response, it gets stored in the local storage and redirects to results page
        */
-      event.preventDefault();
+      e.preventDefault();
       localStorage.clear(); //Clears storage for next request
       let type = toggleSelected === "#email-toggle" ? "email" : "phone";
       
@@ -62,13 +62,13 @@ $(document).ready(function () {
   }
 
   $("#btn-search").on("click", function (e) {
-    submitSearch();
+    submitSearch(e);
   });
 
-  $('input[type="text"]').keypress(function (event) {
-    keycode = (event.keyCode ? event.keyCode : event.which);
-    if (keycode == '13') {
-      submitSearch();
+  $("input[type='text']").keypress(function (e) {
+    keycode = (e.keyCode ? e.keyCode : e.which);
+    if (keycode == "13") {
+      submitSearch(e);
     }
   });
 
@@ -85,13 +85,13 @@ $(document).ready(function () {
 
   $("#email-toggle").on("click", function (e) {
     e.preventDefault();
-    var toggleClass = $('#email-toggle').attr('class');
+    var toggleClass = $("#email-toggle").attr("class");
     activateToggle(toggleClass, "#email-toggle", "#phone-toggle");
   });
 
   $("#phone-toggle").on("click", function (e) {
     e.preventDefault();
-    var toggleClass = $('#phone-toggle').attr('class');
+    var toggleClass = $("#phone-toggle").attr("class");
     activateToggle(toggleClass, "#phone-toggle", "#email-toggle");
   });
 
