@@ -68,9 +68,18 @@
           <h2 class="mb-4 mb-md-5"><strong>Try Again</strong> - Make a new search</h2>
         </div>
         <form>
+          <div class="search-type-toggle">
+            <p>
+              <span class="title text-uppercase">Type of Search:</span>
+              <span class="toggle-row">
+                  <button id="email-toggle" class="btn btn-toggle-on text-uppercase">Email Address</button>
+                  <button id="phone-toggle" class="btn btn-toggle-off text-uppercase">Phone Number</button>
+              </span>
+            </p>
+          </div>
           <div class="input-group">
-            <input class="form-control" type="text" name="email" placeholder="Enter an Email Address" />
-            <p class="error-msg">Please enter a valid email address</p>
+            <input id="search-box" class="form-control" type="text" name="email" placeholder="Enter an Email Address" />
+            <p class="error-msg"></p>
             <button id="btn-search" class="btn btn-form-submit text-uppercase" type="submit">Go!</button>
           </div>
         </form>

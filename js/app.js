@@ -2,13 +2,12 @@ $(document).ready(function () {
 
   let toggleSelected = "#email-toggle";
 
-  const submitSearch = (e) => {
+  // VALIDATE SEARCH INPUT AND SEND REQUEST
+  const submitSearch = () => {
     /**
        * Makes a request to ltv API to search an specific email address.
        * If there's a response, it gets stored in the local storage and redirects to results page
        */
-      e.preventDefault();
-      localStorage.clear(); //Clears storage for next request
       let type = toggleSelected === "#email-toggle" ? "email" : "phone";
       
       var x;
@@ -41,6 +40,7 @@ $(document).ready(function () {
       }
 
       if (x === true) {
+        localStorage.clear(); //Clears storage for next request
         // When search is submitted, hide content while displaying the spinner
         $("#content").addClass("hidden");
         $("#spinner").removeClass("hidden");
@@ -61,17 +61,21 @@ $(document).ready(function () {
       }
   }
 
+  // INPUTTING SEARCH FOR SUBMISSION
   $("#btn-search").on("click", function (e) {
-    submitSearch(e);
+    e.preventDefault();
+
+    submitSearch();
   });
 
   $("input[type='text']").keypress(function (e) {
     keycode = (e.keyCode ? e.keyCode : e.which);
     if (keycode == "13") {
-      submitSearch(e);
+      submitSearch();
     }
   });
 
+  // SETTING SEARCH TYPE
   const activateToggle = (toggleClass, buttonOn, buttonOff) => {
     if(toggleClass.indexOf("btn-toggle-off") > -1) {
       toggleSelected = buttonOn;
@@ -85,12 +89,14 @@ $(document).ready(function () {
 
   $("#email-toggle").on("click", function (e) {
     e.preventDefault();
+    localStorage.clear(); //Clears storage for next request
     var toggleClass = $("#email-toggle").attr("class");
     activateToggle(toggleClass, "#email-toggle", "#phone-toggle");
   });
 
   $("#phone-toggle").on("click", function (e) {
     e.preventDefault();
+    localStorage.clear(); //Clears storage for next request
     var toggleClass = $("#phone-toggle").attr("class");
     activateToggle(toggleClass, "#phone-toggle", "#email-toggle");
   });
