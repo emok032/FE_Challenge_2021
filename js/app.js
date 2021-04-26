@@ -2,66 +2,8 @@ $(document).ready(function () {
 
   let toggleSelected = "#email-toggle";
 
-  $("#btn-search").on("click", function (e) {
-    e.preventDefault();
-    localStorage.clear(); //Clears storage for next request
-    let type = toggleSelected === "#email-toggle" ? "email" : "phone";
-    
-    // Email Input Validation
-    if(type === "email") {
-      $("#search-box").attr("placeholder", "Enter an Email Address");
-      $(".error-msg").text("Please enter a valid email address");
-      typeInput = $('input[type="text"]').val().toLowerCase();
-  
-      var x, y;
-      regEx = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-      if (typeInput.match(regEx)) {
-        x = true;
-      } else {
-        x = false;
-      }
-    }
-
-    // Phone Number Input Validation
-    if(type === "phone") {
-      $("#search-box").attr("placeholder", "Enter a Phone Number");
-      $(".error-msg").text("Please enter a valid phone number");
-      typeInput = $('input[type="text"]').val();
-  
-      var x, y;
-      regEx = /^[0][1-9]\d{9}$|^[1-9]\d{9}$/g;
-      if (typeInput.match(regEx)) {
-        x = true;
-      } else {
-        x = false;
-      }
-    }
-
-    if (x === true) {
-      // When search is submitted, hide content while displaying the spinner
-      $("#content").addClass("hidden");
-      $("#spinner").removeClass("hidden");
-
-      document.querySelector('input[type="text"]').parentNode.classList.remove("error");
-      const proxyurl = "";
-      const url =
-        `https://ltv-data-api.herokuapp.com/api/v1/records.json?${type}=` + typeInput;
-      fetch(proxyurl + url)
-        .then((response) => response.text())
-        .then(function (contents) {
-          localStorage.setItem("userObject", contents);
-          window.location.href = "result.html";
-        })
-        .catch((e) => console.log(e));
-    } else if (x !== true) {
-      document.querySelector('input[type="text"]').parentNode.classList.add("error");
-    }
-  });
-
-  $('input[type="text"]').keypress(function (event) {
-    keycode = (event.keyCode ? event.keyCode : event.which);
-    if (keycode == '13') {
-      /**
+  const submitSearch = () => {
+    /**
        * Makes a request to ltv API to search an specific email address.
        * If there's a response, it gets stored in the local storage and redirects to results page
        */
@@ -69,13 +11,13 @@ $(document).ready(function () {
       localStorage.clear(); //Clears storage for next request
       let type = toggleSelected === "#email-toggle" ? "email" : "phone";
       
+      var x;
       // Email Input Validation
       if(type === "email") {
         $("#search-box").attr("placeholder", "Enter an Email Address");
         $(".error-msg").text("Please enter a valid email address");
         typeInput = $('input[type="text"]').val().toLowerCase();
     
-        var x, y;
         regEx = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
         if (typeInput.match(regEx)) {
           x = true;
@@ -90,7 +32,6 @@ $(document).ready(function () {
         $(".error-msg").text("Please enter a valid phone number");
         typeInput = $('input[type="text"]').val();
     
-        var x, y;
         regEx = /^[0][1-9]\d{9}$|^[1-9]\d{9}$/g;
         if (typeInput.match(regEx)) {
           x = true;
@@ -118,6 +59,16 @@ $(document).ready(function () {
       } else if (x !== true) {
         document.querySelector('input[type="text"]').parentNode.classList.add("error");
       }
+  }
+
+  $("#btn-search").on("click", function (e) {
+    submitSearch();
+  });
+
+  $('input[type="text"]').keypress(function (event) {
+    keycode = (event.keyCode ? event.keyCode : event.which);
+    if (keycode == '13') {
+      submitSearch();
     }
   });
 
