@@ -128,6 +128,52 @@ section {
 --- Search Form ---
 ***************************************************************
 ************************************************************ */
+
+.search-type-toggle .title {
+  color: #fff;
+  margin: 0;
+}
+
+.toggle-row {
+  margin-left: 25px;
+}
+
+.btn-toggle-on {
+	position: relative;
+  background: #f6bc25;
+  color: #004a80;
+  font-weight: 600;
+  margin-right: 20px;
+	border: 3px solid #f6bc25;
+  height: 35px;
+  line-height: 0;
+}
+
+/* Credit: https://cssarrowplease.com */
+.btn-toggle-on:after, .btn-toggle-on:before {
+	top: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: "";
+	position: absolute;
+	pointer-events: none;
+	border-color: rgba(246, 188, 37, 0);
+	border-top-color: #f6bc25;
+	border-width: 10px;
+	margin-left: -10px;
+}
+
+.btn-toggle-off {
+	position: relative;
+  background: #004a80;
+  color: #f6bc25;
+  font-weight: 600;
+  margin-right: 20px;
+  border: 3px solid #f6bc25;
+  height: 35px;
+  line-height: 0;
+}
+
 .btn-form-submit {
   font-size: 24px;
   font-weight: bold;
@@ -212,6 +258,22 @@ section {
   }
   .btn-form-submit {
     margin: 12px 0 0 0;
+  }
+  .search-type-toggle .title {
+    color: #fff;
+    display: none;
+  }
+  .search-type-toggle p {
+    width: 101%;
+  }
+  .toggle-row {
+    margin-left: 0;
+    width: 100%;
+  }
+  .toggle-row button {
+    margin-right: 0;
+    width: 49%;
+    font-size: .85rem
   }
 }
 
