@@ -13,7 +13,6 @@ $(document).ready(function () {
       var x;
       // Email Input Validation
       if(type === "email") {
-        $("#search-box").attr("placeholder", "Enter an Email Address");
         $(".error-msg").text("Please enter a valid email address");
         typeInput = $('input[type="text"]').val().toLowerCase();
     
@@ -27,7 +26,6 @@ $(document).ready(function () {
 
       // Phone Number Input Validation
       if(type === "phone") {
-        $("#search-box").attr("placeholder", "Enter a Phone Number");
         $(".error-msg").text("Please enter a valid phone number");
         typeInput = $('input[type="text"]').val();
     
@@ -89,14 +87,20 @@ $(document).ready(function () {
 
   $("#email-toggle").on("click", function (e) {
     e.preventDefault();
-    localStorage.clear(); //Clears storage for next request
+    localStorage.clear(); // Clears storage for next request
+
+    $('#search-box').attr('placeholder','Enter an email address'); // Resets placeholder to email copy
+
     var toggleClass = $("#email-toggle").attr("class");
     activateToggle(toggleClass, "#email-toggle", "#phone-toggle");
   });
 
   $("#phone-toggle").on("click", function (e) {
     e.preventDefault();
-    localStorage.clear(); //Clears storage for next request
+    localStorage.clear(); // Clears storage for next request
+
+    $('#search-box').attr('placeholder','Enter a phone number'); // Resets placeholder to phone number copy
+    
     var toggleClass = $("#phone-toggle").attr("class");
     activateToggle(toggleClass, "#phone-toggle", "#email-toggle");
   });
